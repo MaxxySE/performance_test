@@ -41,8 +41,6 @@ def main():
     if 'tests' in tests_json:
         put_values(tests_json['tests'], values_map)
 
-    print(tests_json)
-
     with open(path_report, "w", encoding='utf-8') as f:
         json.dump(tests_json, f, indent=2, ensure_ascii=False)
     print(f"Результат успешно записан в файл: {path_report}")
