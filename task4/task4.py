@@ -1,27 +1,41 @@
-nums = []
+import sys
+
 optimal = 0
 
-def open_file(filename):
+def read_file(filename):
+
+    nums = []
+
     with open(filename, 'r') as f:
         content = f.readlines()
 
     for line in content:
-        nums.append(int(line))
+        nums.append(int(line.strip()))
 
-def find_optimal_steps(median):
+    return nums
+
+def find_optimal_steps(nums, median):
     global optimal
 
     for num in nums:
         optimal += abs(num - median)
 
 def main():
-    open_file("task4_1.txt")
-    #open_file("task4_2.txt")
+    if len(sys.argv) < 2:
+        print("Укажите путь к файлу как аргумент")
+        return
+
+    filename = sys.argv[1]
+    nums = read_file(filename)
+
+    if not nums:
+        print("Файл пуст")
+        return
 
     nums.sort()
-    median = nums[int(len(nums)/2)]
+    median = nums[len(nums) // 2]
 
-    find_optimal_steps(median)
+    find_optimal_steps(nums, median)
 
     if optimal <= 20:
         print("Минимальное количество ходов: ", optimal)
