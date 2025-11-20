@@ -1,29 +1,48 @@
 from threading import Thread
+import sys
 
 elements = {}
 results = {}
 
 def main():
+
+    arr = []
     k = 0
 
-    while True:
-        print("Type 3 to Start Program")
-        print("Or press enter to continue")
-        s = input()
+    if (len(sys.argv) - 1) % 2 != 0:
+        print("Необходимо ввести значения в формате n m (можно несколько).\n"
+              "Примеры: 4 2 6 4, 6 3 5 2 7 3. Нечетное количество аргументов недопустимо")
+        return
 
-        if s == '3':
-            break
+    for i in range(1, int(len(sys.argv)), 2):
+        n = int(sys.argv[i])
+        m = int(sys.argv[i+1])
 
-        arr = []
-
-        n = int(input("n = "))
-        m = int(input("m = "))
-
-        for i in range(1,n+1):
-            arr.append(i)
+        for j in range(1, n+1):
+            arr.append(j)
 
         elements[k] = arr, m
+        arr = []
         k += 1
+
+    # while True:
+    #     print("Type 3 to Start Program")
+    #     print("Or press enter to continue")
+    #     s = input()
+    #
+    #     if s == '3':
+    #         break
+    #
+    #     arr = []
+    #
+    #     n = int(input("n = "))
+    #     m = int(input("m = "))
+    #
+    #     for i in range(1,n+1):
+    #         arr.append(i)
+    #
+    #     elements[k] = arr, m
+    #     k += 1
 
     threads_creation()
 
