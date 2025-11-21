@@ -10,8 +10,11 @@ def main():
     ellipse = get_file_nums(sys.argv[1])
     points = get_file_nums(sys.argv[2])
 
-    summary_list = get_summary_list(ellipse, points)
+    if len(ellipse) < 2:
+        print("Файл с параметрами эллипса некорректен.")
+        return
 
+    summary_list = get_summary_list(ellipse, points)
     results = get_results(summary_list)
 
     for result in results:
@@ -24,7 +27,7 @@ def get_file_nums(filename):
     with open(filename, 'r') as f:
         for i, line in enumerate(f):
             if line.strip():
-                nums[i] = list(map(int, line.split()))
+                nums[i] = list(map(float, line.split()))
 
     return nums
 
